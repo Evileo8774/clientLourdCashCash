@@ -6,21 +6,25 @@ import java.awt.event.*;
 
 public class Fenetre implements ActionListener {
 
+    //variables permettant la gestion de la taille de la fenêtre
     public	final static int HT = 1550;
     public 	final static int LG = 800;
     public	final static int X = 150;
     public 	final static int Y = 200;
 
+    //fenêtre
     private JFrame f;
 
+    //boutons
     private JButton btnXml;
     private JButton btnPdf;
     private JButton btnContrat;
-
     private JButton btnRetour;
 
+    //variable permettant de savoir sur quelle page on se situe, par défaut, la page d'accueil
     private String pageActuelle = "accueil";
 
+    //constructeur, permet la génération de la page d'accueil
     public Fenetre(){
         f = new JFrame("Cash Cash");
         accueil();
@@ -30,6 +34,7 @@ public class Fenetre implements ActionListener {
         f.setVisible(true);
     }
 
+    //permet la génération d'une nouvelle fenêtre
     public void initNewFrame(){
         f = new JFrame("Cash Cash");
         f.setBounds(X, Y, HT, LG);
@@ -37,9 +42,10 @@ public class Fenetre implements ActionListener {
         f.setLayout(null);
     }
 
+    //permet d'afficher un certain contenu dans la fenêtre en fonction de la variable pageActuelle
     public void displayFrame(){
-        f.setVisible(false);
-        initNewFrame();
+        f.setVisible(false); //on détruit la fenêtre actuelle
+        initNewFrame(); //on en génère une nouvelle
         switch(pageActuelle){
             case "accueil":
                 accueil();
@@ -59,6 +65,7 @@ public class Fenetre implements ActionListener {
         f.setVisible(true);
     }
 
+    //génère la page d'accueil
     public void accueil(){
         btnXml = new JButton("Génération de fichier xml");
         btnXml.setBounds(200, 100, 250, 50);
@@ -77,12 +84,11 @@ public class Fenetre implements ActionListener {
         f.add(btnContrat);
     }
 
+    //création du bouton permettant de retourner à la page d'accueil
     public void retour(){
         btnRetour = new JButton("Retour");
         btnRetour.setBounds(0, 0, 100, 50);
         btnRetour.addActionListener(this);
-
-
         f.add(btnRetour);
     }
 
@@ -98,6 +104,7 @@ public class Fenetre implements ActionListener {
 
     }
 
+    //gestion des clics sur les différents boutons
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == btnXml){
@@ -109,7 +116,6 @@ public class Fenetre implements ActionListener {
         } else {
             pageActuelle = "accueil";
         }
-        System.out.println(pageActuelle);
         displayFrame();
     }
 }
