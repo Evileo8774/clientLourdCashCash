@@ -10,10 +10,12 @@ public class Fenetre {
     public	final static int X = 150;
     public 	final static int Y = 200;
     public Fenetre(){
-        JFrame f = new JFrame("Cash Cash");
+
 
         PageAffichee p = new PageAffichee();
-        p.accueil(f);
+        JFrame f = p.pageAAfficher();
+
+
 
         f.setBounds(X, Y, HT, LG);
         f.setBackground(Color.darkGray);
