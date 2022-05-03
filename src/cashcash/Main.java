@@ -1,8 +1,32 @@
 package cashcash;
 
+import java.sql.*;
+import java.util.Date;
+import javax.swing.*;
+
 public class Main {
 
     public static void main(String[] args) {
+
+        ParametresBDD unParametre = new ParametresBDD("root", "", "tp_bd",
+                "jdbc:mysql:///");
+
+        Connection connexion = null;
+        try {
+            // chargement classe driver JDBC MYSQL
+            Class.forName("org.gjt.mm.mysql.Driver");
+            connexion = DriverManager.getConnection(unParametre.getDriverSGBD() + unParametre.getServeurBDD(),
+                    unParametre.getNomUtilisateur(), unParametre.getMotDePasse());
+            //message lorsque réussite
+            //JOptionPane.showMessageDialog(null, "Connexion OK");
+        } catch (ClassNotFoundException ex) {
+            // exception si class forName non declenchée
+            JOptionPane.showMessageDialog(null, "Classe introuvable " + ex.getMessage ());
+        } catch (SQLException ex){
+            // exception en cas de soucis SGBD
+            JOptionPane.showMessageDialog(null, "Connexion impossible : " + ex.getMessage ());
+        }
+
         Fenetre f = new Fenetre();
     }
 }
