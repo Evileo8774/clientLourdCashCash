@@ -31,10 +31,6 @@ public class Main {
             JOptionPane.showMessageDialog(null, "Connexion impossible : " + ex.getMessage ());
         }
 
-        //Fenetre f = new Fenetre(connexion);
-
-        Contrat c = new Contrat(connexion);
-        String[][] test = c.getMateriel();
-        System.out.println(Arrays.deepToString(test));
+        Fenetre f = new Fenetre(connexion);
     }
 }

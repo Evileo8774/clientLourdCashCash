@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class Contrat {
 
+    //stockage de la connexion à la bdd
     private Connection cnx;
 
     public Contrat(Connection cnx){
