@@ -3,6 +3,9 @@ package cashcash;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Fenetre implements ActionListener {
 
@@ -21,17 +24,21 @@ public class Fenetre implements ActionListener {
     private JButton btnContrat;
     private JButton btnRetour;
 
+    private Connection cnx;
+
     //variable permettant de savoir sur quelle page on se situe, par défaut, la page d'accueil
     private String pageActuelle = "accueil";
 
     //constructeur, permet la génération de la page d'accueil
-    public Fenetre(){
+    public Fenetre(Connection connexion){
         f = new JFrame("Cash Cash");
         accueil();
         f.setBounds(X, Y, HT, LG);
         f.setBackground(Color.darkGray);
         f.setLayout(null);
         f.setVisible(true);
+
+        cnx = connexion;
     }
 
     //permet la génération d'une nouvelle fenêtre
@@ -101,6 +108,7 @@ public class Fenetre implements ActionListener {
     }
 
     public void contrat(){
+        Contrat c = new Contrat(cnx);
 
     }
 

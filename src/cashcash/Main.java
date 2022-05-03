@@ -1,6 +1,7 @@
 package cashcash;
 
 import java.sql.*;
+import java.util.Arrays;
 import java.util.Date;
 import javax.swing.*;
 
@@ -11,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ParametresBDD unParametre = new ParametresBDD("root", "", "tp_bd",
+        ParametresBDD unParametre = new ParametresBDD("root", "", "ap3",
                 "jdbc:mysql:///");
 
         Connection connexion = null;
@@ -30,6 +31,10 @@ public class Main {
             JOptionPane.showMessageDialog(null, "Connexion impossible : " + ex.getMessage ());
         }
 
-        Fenetre f = new Fenetre();
+        //Fenetre f = new Fenetre(connexion);
+
+        Contrat c = new Contrat(connexion);
+        String[][] test = c.getMateriel();
+        System.out.println(Arrays.deepToString(test));
     }
 }
