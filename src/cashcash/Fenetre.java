@@ -36,7 +36,7 @@ public class Fenetre implements ActionListener {
 
     //permet la génération d'une nouvelle fenêtre
     public void initNewFrame(){
-        f = new JFrame("Cash Cash");
+        f = new JFrame("Cash Cash "+pageActuelle);
         f.setBounds(X, Y, HT, LG);
         f.setBackground(Color.darkGray);
         f.setLayout(null);
