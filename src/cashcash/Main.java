@@ -4,6 +4,9 @@ import java.sql.*;
 import java.util.Date;
 import javax.swing.*;
 
+import cashcash.Fenetre;
+import cashcash.ParametresBDD;
+
 public class Main {
 
     public static void main(String[] args) {

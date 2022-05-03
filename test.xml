@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<repertoire>
+    <nserie Numero="1648321484">
+        <dateVente>01/01/2000</dateVente>
+        <dateInstallation>01/01/2000</dateInstallation>
+        <nom>terminal-40</nom>
+        <numeroContrat>45</numeroContrat>
+        <dateSignatureContrat>01/01/2000</dateSignatureContrat>
+        <dateEcheanceContrat>01/01/2001</dateEcheanceContrat>
+        <refContrat>198154</refContrat>
+    </nserie>
+</repertoire>
