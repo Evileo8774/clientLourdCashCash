@@ -15,7 +15,7 @@ import org.w3c.dom.Element;
 
 public class CreerXML {
 	
-	public static void main(String args[]) {
+	public CreerXML(String[][] client) {
 		 
 	      try {
 	 
@@ -33,43 +33,49 @@ public class CreerXML {
 	 
 	        // numéro de série
 	        Attr attr = doc.createAttribute("Numero");
-	        attr.setValue("1648321484");
+	        attr.setValue(client[0][0]);
 	        nserie.setAttributeNode(attr);
 	 
 	        // date de vente
 	        Element dateVente = doc.createElement("dateVente");
-	        dateVente.appendChild(doc.createTextNode("01/01/2000"));
+	        dateVente.appendChild(doc.createTextNode(client[0][1]));
 	        nserie.appendChild(dateVente);
 	 
 	        // date d'installation
 	        Element dateInstallation = doc.createElement("dateInstallation");
-	        dateInstallation.appendChild(doc.createTextNode("01/01/2000"));
+	        dateInstallation.appendChild(doc.createTextNode(client[0][2]));
 	        nserie.appendChild(dateInstallation);
 	 
 	        // nom du matériel
-	        Element nomMateriel = doc.createElement("nom");
+			  //à supprimer : Le groupe de Luca - Valentin - Léo n'a pas de nom de matériel dans la table. Il faudra donc décommenter le code
+	        /*Element nomMateriel = doc.createElement("nom");
 	        nomMateriel.appendChild(doc.createTextNode("terminal-40"));
-	        nserie.appendChild(nomMateriel);
+	        nserie.appendChild(nomMateriel);*/
 	  
 	        // numéro de contrat
 	        Element numeroContrat = doc.createElement("numeroContrat");
-	        numeroContrat.appendChild(doc.createTextNode("45"));
+	        numeroContrat.appendChild(doc.createTextNode(client[0][3]));
 	        nserie.appendChild(numeroContrat);
 	        
 	        // date de signature du contrat
 	        Element dateSignature = doc.createElement("dateSignatureContrat");
-	        dateSignature.appendChild(doc.createTextNode("01/01/2000"));
+	        dateSignature.appendChild(doc.createTextNode(client[0][4]));
 	        nserie.appendChild(dateSignature);
 	        
-	        // date de signature du contrat
+	        // date d'échéance du contrat
 	        Element dateEcheance = doc.createElement("dateEcheanceContrat");
-	        dateEcheance.appendChild(doc.createTextNode("01/01/2001"));
+	        dateEcheance.appendChild(doc.createTextNode(client[0][5]));
 	        nserie.appendChild(dateEcheance);
 	        
-	        // date de signature du contrat
+	        // référence du contrat
 	        Element refContrat = doc.createElement("refContrat");
-	        refContrat.appendChild(doc.createTextNode("198154"));
+	        refContrat.appendChild(doc.createTextNode(client[0][6]));
 	        nserie.appendChild(refContrat);
+
+			  // nom de du client
+			  Element raisonSociale = doc.createElement("raisonSociale");
+			  raisonSociale.appendChild(doc.createTextNode(client[0][7]));
+			  nserie.appendChild(raisonSociale);
 	 
 	        // écrire le contenu dans un fichier XML
 	        TransformerFactory transformerFactory = TransformerFactory.newInstance();

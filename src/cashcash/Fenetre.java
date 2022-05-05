@@ -24,9 +24,11 @@ public class Fenetre implements ActionListener {
     private JButton btnContrat;
     private JButton btnRetour;
     private JButton btnRenouvellement;
+    private JButton btnGenXml;
 
     //listes déroulantes
-    private JList contratMAJ;
+    private JList listContratMAJ;
+    private JList listClients;
 
     //connexion à la bdd
     private Connection cnx;
@@ -36,6 +38,7 @@ public class Fenetre implements ActionListener {
 
     //variables permettant le contact avec les autres classes
     private Contrat c;
+    private Client cl;
 
     //constructeur, permet la génération de la page d'accueil
     public Fenetre(Connection connexion){
@@ -48,6 +51,7 @@ public class Fenetre implements ActionListener {
 
         cnx = connexion;
         c = new Contrat(cnx);
+        cl = new Client(cnx);
     }
 
     //permet la génération d'une nouvelle fenêtre
@@ -109,7 +113,23 @@ public class Fenetre implements ActionListener {
     }
 
     public void xml(){
+        String[][] clients = cl.getClients();
 
+        String[] affichageSelect = new String[clients.length];
+
+        for(int i =0; i<clients.length; i++){
+            affichageSelect[i] = clients[i][1];
+        }
+
+
+        listClients = new JList(affichageSelect);
+        listClients.setBounds(100, 100, 150, clients.length*18);
+        f.add(listClients);
+
+        btnGenXml = new JButton("Générer le fichier XML");
+        btnGenXml.setBounds(300, 100, 150, 50);
+        btnGenXml.addActionListener(this);
+        f.add(btnGenXml);
     }
 
     public void pdf(){
@@ -125,9 +145,9 @@ public class Fenetre implements ActionListener {
             affichageSelect[i] = contratsFinis[i][0];
         }
 
-        contratMAJ = new JList(affichageSelect);
-        contratMAJ.setBounds(100, 100, 150, 50);
-        f.add(contratMAJ);
+        listContratMAJ = new JList(affichageSelect);
+        listContratMAJ.setBounds(100, 100, 150, contratsFinis.length*18);
+        f.add(listContratMAJ);
 
         btnRenouvellement = new JButton("Renouveler le contrat");
         btnRenouvellement.setBounds(300, 100, 150, 50);
@@ -148,8 +168,12 @@ public class Fenetre implements ActionListener {
         } else if(e.getSource() == btnRetour){
             pageActuelle = "accueil";
         } else if(e.getSource() == btnRenouvellement){
-            String contratChoisi = (String) contratMAJ.getSelectedValue();
+            String contratChoisi = (String) listContratMAJ.getSelectedValue();
             c.updateContratMaintenance(contratChoisi);
+        } else if(e.getSource() == btnGenXml){
+            int contratChoisi = listClients.getSelectedIndex() + 1;
+            String[][] infosClient = cl.getInformationsClient(contratChoisi);
+            CreerXML xml = new CreerXML(infosClient);
         }
         displayFrame();
     }

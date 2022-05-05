@@ -5,12 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Contrat {
-
-    //stockage de la connexion à la bdd
+public class Client {
     private Connection cnx;
 
-    public Contrat(Connection cnx){
+    public Client(Connection cnx){
         this.cnx = cnx;
     }
 
@@ -48,29 +46,19 @@ public class Contrat {
         return null;
     }
 
-    private void executionRequete(String query){
-        try {
-            Statement st = cnx.createStatement(); //équivalent en pdo : $req = $cnx->prepare();
+    public String[][] getInformationsClient(int numClient){
+        String query = "SELECT numSerie, dateVente, dateInstall, numContrat, dateSignature, dateEcheance, materiel.ref, raisonSociale FROM client, materiel, contratmaintenance WHERE materiel.numClient = client.numClient AND contratmaintenance.numClient = client.numClient AND client.numClient = "+numClient; //requête sql
 
-            st.executeUpdate(query);
+        String[][] informationsClient = executionRequete(query, 8); // le 2e paramètre doit être équivalent au nombre de colonnes que vous avez mis dans la requête (entre le SELECT et le FROM)
 
-            st.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        return informationsClient;
     }
 
-    public String[][] getContratMaintenanceTermine(){
-        String query = "SELECT numContrat, dateEcheance, numClient, ref FROM contratMaintenance WHERE dateEcheance <= CURRENT_DATE()"; //requête sql
+    public String[][] getClients(){
+        String query = "SELECT numClient, raisonSociale FROM client"; //requête sql
 
-        String[][] contratMaitenanceTermine = executionRequete(query, 4); // le 2e paramètre doit être équivalent au nombre de colonnes que vous avez mis dans la requête (entre le SELECT et le FROM)
+        String[][] clients = executionRequete(query, 2); // le 2e paramètre doit être équivalent au nombre de colonnes que vous avez mis dans la requête (entre le SELECT et le FROM)
 
-        return contratMaitenanceTermine;
-    }
-
-    public void updateContratMaintenance(String num){
-        String query = "UPDATE contratmaintenance SET dateEcheance = DATE_ADD(CURRENT_DATE(), INTERVAL 1 YEAR) WHERE numContrat ="+num; //requête sql
-
-        executionRequete(query);
+        return clients;
     }
 }
