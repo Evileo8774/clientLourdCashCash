@@ -31,6 +31,7 @@ public class Main {
             JOptionPane.showMessageDialog(null, "Connexion impossible : " + ex.getMessage ());
         }
 
+        //création de la fenêtre d'application
         Fenetre f = new Fenetre(connexion);
     }
 }

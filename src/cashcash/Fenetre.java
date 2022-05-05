@@ -142,7 +142,7 @@ public class Fenetre implements ActionListener {
         String[] affichageSelect = new String[contratsFinis.length];
 
         for(int i =0; i<contratsFinis.length; i++){
-            affichageSelect[i] = contratsFinis[i][0];
+            affichageSelect[i] = contratsFinis[i][4];
         }
 
         listContrats = new JList(affichageSelect);
@@ -161,7 +161,7 @@ public class Fenetre implements ActionListener {
         String[] affichageSelect = new String[contratsFinis.length];
 
         for(int i =0; i<contratsFinis.length; i++){
-            affichageSelect[i] = contratsFinis[i][0];
+            affichageSelect[i] = contratsFinis[i][4];
         }
 
         listContratMAJ = new JList(affichageSelect);
@@ -192,14 +192,14 @@ public class Fenetre implements ActionListener {
             displayFrame();
         } else if(e.getSource() == btnRenouvellement){
             String contratChoisi = (String) listContratMAJ.getSelectedValue();
-            c.updateContratMaintenance(contratChoisi);
+            c.updateContratMaintenance(c.getNumClientByRaisonSociale(contratChoisi));
         } else if(e.getSource() == btnGenXml){
             int contratChoisi = listClients.getSelectedIndex() + 1;
             String[][] infosClient = cl.getInformationsClient(contratChoisi);
             CreerXML xml = new CreerXML(infosClient);
         } else if(e.getSource() == btnGenPdf){
-            int contratChoisi = listContrats.getSelectedIndex() + 1;
-            String[][] numSerieMateriel = c.getNumSerieByClient(contratChoisi);
+            String contratChoisi = (String) listContrats.getSelectedValue();
+            String[][] numSerieMateriel = c.getNumSerieByClient(c.getNumClientByRaisonSociale(contratChoisi));
             try {
                 CreerPDF pdf = new CreerPDF(numSerieMateriel[0][0]);
             } catch (DocumentException ex) {
