@@ -17,7 +17,7 @@ public class CreerPDF {
 		try {
 			//création du document avec le name
 			Document pdfDoc = new Document();
-			String name = "testt.pdf";
+			String name = "relance_"+numSerie+".pdf";
 			PdfWriter.getInstance(pdfDoc, new FileOutputStream(name));
 
 			//ouverture du document
@@ -26,7 +26,7 @@ public class CreerPDF {
 			//ce que contient le PDF
 			Phrase header = new Phrase("Bonjour à vous\n\n" +
 					"Je me permets de vous contacter concernant le matériel avec le numéro de série: "+numSerie+".\n" +
-					"Merci de me confirmer ci-joint l'avancée pour la commande.\n" +
+					"Le contrat de maintenance du matériel est arrivé à son terme, veuillez nous contacter pour être de nouveau couvert.\n" +
 					"Merci à vous et bonne journée\n\n" +
 					"Cordialement,\n" +
 					"LeGourpe V de V.");

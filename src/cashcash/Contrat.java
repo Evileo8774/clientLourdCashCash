@@ -61,7 +61,7 @@ public class Contrat {
     }
 
     public String[][] getContratMaintenanceTermine(){
-        String query = "SELECT numContrat, dateEcheance, numClient, ref FROM contratMaintenance WHERE dateEcheance <= CURRENT_DATE()"; //requête sql
+        String query = "SELECT numContrat, dateEcheance, numClient, ref FROM contratMaintenance WHERE dateEcheance > CURRENT_DATE()"; //requête sql
 
         String[][] contratMaitenanceTermine = executionRequete(query, 4); // le 2e paramètre doit être équivalent au nombre de colonnes que vous avez mis dans la requête (entre le SELECT et le FROM)
 
@@ -72,5 +72,13 @@ public class Contrat {
         String query = "UPDATE contratmaintenance SET dateEcheance = DATE_ADD(CURRENT_DATE(), INTERVAL 1 YEAR) WHERE numContrat ="+num; //requête sql
 
         executionRequete(query);
+    }
+
+    public String[][] getNumSerieByClient(int numClient){
+        String query = "SELECT numSerie FROM materiel WHERE numClient = "+numClient; //requête sql
+
+        String[][] numSerieMateriel = executionRequete(query, 1); // le 2e paramètre doit être équivalent au nombre de colonnes que vous avez mis dans la requête (entre le SELECT et le FROM)
+
+        return numSerieMateriel;
     }
 }
