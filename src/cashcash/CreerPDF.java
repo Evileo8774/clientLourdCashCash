@@ -12,10 +12,10 @@ import java.util.logging.Logger;
 
 public class CreerPDF {
 
-	public static void main(String[]args)throws DocumentException {
+	public CreerPDF(String numSerie) throws DocumentException {
 		// effectuer un try catch pour les exceptions
 		try {
-			//création du document avec le name
+			//crÃ©ation du document avec le name
 			Document pdfDoc = new Document();
 			String name = "testt.pdf";
 			PdfWriter.getInstance(pdfDoc, new FileOutputStream(name));
@@ -24,10 +24,10 @@ public class CreerPDF {
 			pdfDoc.open();
 
 			//ce que contient le PDF
-			Phrase header = new Phrase("Bonjour à vous\n\n" +
-					"Je me permets de vous contacter concernant le matériel avec le numéro de série: 14 26 34 18 34.\n" +
-					"Merci de me confirmer ci-joint l'avancé pour la commande.\n" +
-					"Merci à vous et bonne journée\n\n" +
+			Phrase header = new Phrase("Bonjour Ã  vous\n\n" +
+					"Je me permets de vous contacter concernant le matÃ©riel avec le numÃ©ro de sÃ©rie: "+numSerie+".\n" +
+					"Merci de me confirmer ci-joint l'avancÃ©e pour la commande.\n" +
+					"Merci Ã  vous et bonne journÃ©e\n\n" +
 					"Cordialement,\n" +
 					"LeGourpe V de V.");
 
@@ -35,8 +35,8 @@ public class CreerPDF {
 			//fermeture du document PDF
 			pdfDoc.close();
 
-			//certification que le PDF est bien crée
-			System.out.println("PDF bien crée");
+			//certification que le PDF est bien crÃ©Ã©
+			System.out.println("PDF ok");
 
 		} catch (FileNotFoundException DocumentException) {
 			Logger.getLogger(CreerPDF.class.getName());
