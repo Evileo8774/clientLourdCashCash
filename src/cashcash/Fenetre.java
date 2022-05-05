@@ -23,11 +23,19 @@ public class Fenetre implements ActionListener {
     private JButton btnPdf;
     private JButton btnContrat;
     private JButton btnRetour;
+    private JButton btnRenouvellement;
 
+    //listes déroulantes
+    private JList contratMAJ;
+
+    //connexion à la bdd
     private Connection cnx;
 
     //variable permettant de savoir sur quelle page on se situe, par défaut, la page d'accueil
     private String pageActuelle = "accueil";
+
+    //variables permettant le contact avec les autres classes
+    private Contrat c;
 
     //constructeur, permet la génération de la page d'accueil
     public Fenetre(Connection connexion){
@@ -39,6 +47,7 @@ public class Fenetre implements ActionListener {
         f.setVisible(true);
 
         cnx = connexion;
+        c = new Contrat(cnx);
     }
 
     //permet la génération d'une nouvelle fenêtre
@@ -108,7 +117,22 @@ public class Fenetre implements ActionListener {
     }
 
     public void contrat(){
-        Contrat c = new Contrat(cnx);
+        String[][] contratsFinis = c.getContratMaintenanceTermine();
+
+        String[] affichageSelect = new String[contratsFinis.length];
+
+        for(int i =0; i<contratsFinis.length; i++){
+            affichageSelect[i] = contratsFinis[i][0];
+        }
+
+        contratMAJ = new JList(affichageSelect);
+        contratMAJ.setBounds(100, 100, 150, 50);
+        f.add(contratMAJ);
+
+        btnRenouvellement = new JButton("Renouveler le contrat");
+        btnRenouvellement.setBounds(300, 100, 150, 50);
+        btnRenouvellement.addActionListener(this);
+        f.add(btnRenouvellement);
 
     }
 
@@ -121,8 +145,11 @@ public class Fenetre implements ActionListener {
             pageActuelle = "pdf";
         } else if(e.getSource() == btnContrat){
             pageActuelle = "contrat";
-        } else {
+        } else if(e.getSource() == btnRetour){
             pageActuelle = "accueil";
+        } else if(e.getSource() == btnRenouvellement){
+            String contratChoisi = (String) contratMAJ.getSelectedValue();
+            c.updateContratMaintenance(contratChoisi);
         }
         displayFrame();
     }

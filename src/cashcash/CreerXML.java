@@ -74,7 +74,7 @@ public class CreerXML {
 	        // écrire le contenu dans un fichier XML
 	        TransformerFactory transformerFactory = TransformerFactory.newInstance();
 	        Transformer transformer = transformerFactory.newTransformer();
-	        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+	        transformer.setOutputProperty(OutputKeys.INDENT, "yes"); // aller à la ligne suivante
 	        DOMSource source = new DOMSource(doc);
 	        StreamResult resultat = new StreamResult(new File("test.xml"));
 	 
